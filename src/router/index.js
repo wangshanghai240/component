@@ -3,10 +3,10 @@ import vuerouter from 'vue-router'
 // 安装该插件
 Vue.use(vuerouter)
 // 路由懒加载
-const Home = () => import('../views/Home')
-const Cart = () => import('../views/Cart')
-const Cate = () => import('../views/Cate')
-const Profile = () => import('../views/Profile')
+const Home = () => import('views/home/Home')
+const Cart = () => import('views/cart/Cart')
+const Cate = () => import('views/cate/Cate')
+const Profile = () => import('views/profile/Profile')
 // 路由映射关系表
 let routes = [
     {
@@ -18,7 +18,7 @@ let routes = [
         component: Home
     },
     {
-        path: '/cate',
+        path: '/cate/',
         component: Cate
     },
     {

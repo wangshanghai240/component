@@ -6,10 +6,11 @@
 
 <script>
 export default {
-    name:'tabbar'
+    name:'TabBar'
 }
 </script>
 
 <style scoped>
-    @import '../../assets/css/tabbar/tabbar.css'
+/* 导入css需要加 ~ */
+    @import '~assets/css/tabbar/tabbar.css';
 </style>

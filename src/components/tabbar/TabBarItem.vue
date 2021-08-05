@@ -7,7 +7,7 @@
 
 <script>
 export default {
-  name:'tabbaritem',
+  name:'TabBarItem',
   props:{
     path:String
   },
@@ -15,12 +15,22 @@ export default {
     showitem(){
       console.log('ccc')
       this.$router.push(this.path)
+    },
+    clickshow(){
+      this.$router.push({
+        path:'/profile',
+        query:{
+          name:'wangshanghai',
+          age:18
+        }
+      })
     }
   }
 }
 </script>
 
 <style>
+@import '../../assets/iconfont/iconfont.css';
 .tabar-item{
   flex:1;
 }
@@ -30,5 +40,8 @@ export default {
 .tabar-item img{
   vertical-align: middle;
   width:30px;
+}
+.tabar-item i{
+  font-size:18px;
 }
 </style>

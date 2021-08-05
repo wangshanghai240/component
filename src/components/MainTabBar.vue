@@ -1,29 +1,29 @@
 <template>
   <Tabbar>
       <TabBarItem path='/home'>
-        <img slot='item-icon' src="../assets/img/logo-color.png" alt="">
+        <i class='iconfont icon-shouye' slot="item-icon"></i>
         <div slot="item-txt">首页</div>
       </TabBarItem>
       <TabBarItem path='/cate'>
-        <img slot="item-icon" src="../assets/img/logo-color.png" alt="">
+        <i class='iconfont icon-leimupinleifenleileibie2' slot="item-icon"></i>
         <div slot="item-txt">分类</div>
       </TabBarItem>
       <TabBarItem path='/cart'>
-        <img slot="item-icon" src="../assets/img/logo-color.png" alt="">
+        <i class='iconfont icon-gouwuchekong' slot="item-icon"></i>
         <div slot="item-txt">购物车</div>
       </TabBarItem>
       <TabBarItem path='/profile'>
-        <img slot="item-icon" src="../assets/img/logo-color.png" alt="">
+        <i class='iconfont icon-wodedangxuan' slot="item-icon"></i>
         <div slot="item-txt">我的</div>
       </TabBarItem> 
     </Tabbar>
 </template>
 
 <script>
-import Tabbar from "./tabbar/TabBar.vue";
-import TabBarItem from './tabbar/TabBarItem.vue'
+import Tabbar from './tabbar/TabBar'
+import TabBarItem from './tabbar/TabBarItem'
 export default {
-    name:'maintabar',
+    name:'MainTabBar',
     components:{
         TabBarItem,
         Tabbar
@@ -31,6 +31,6 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 
 </style>
