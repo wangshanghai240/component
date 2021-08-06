@@ -8,57 +8,11 @@
     <home-swiper :banners="banner" class="swiper"></home-swiper>
     <!-- 推荐组件 -->
     <home-recommend :recommend="recommend"></home-recommend>
-    <tab-control :title="['流行', '新款', '精选']"></tab-control>
-    <li></li>
-    <li></li>
-    <li></li>
-    <li></li>
-    <li></li>
-    <li></li>
-    <li></li>
-    <li></li>
-    <li></li>
-    <li></li>
-    <li></li>
-    <li></li>
-    <li></li>
-    <li></li>
-    <li></li>
-    <li></li>
-    <li></li>
-    <li></li>
-    <li></li>
-    <li></li>
-    <li></li>
-    <li></li>
-    <li></li>
-    <li></li>
-    <li></li>
-    <li></li>
-    <li></li>
-    <li></li>
-    <li></li>
-    <li></li>
-    <li></li>
-    <li></li>
-    <li></li>
-    <li></li>
-    <li></li>
-    <li></li>
-    <li></li>
-    <li></li>
-    <li></li>
-    <li></li>
-    <li></li>
-    <li></li>
-    <li></li>
-    <li></li>
-    <li></li>
-    <li></li>
-    <li></li>
-    <li></li>
-    <li></li>
-    <li></li>
+    <tab-control
+      :title="['流行', '新款', '精选']"
+      @tabclick="tabclick"
+    ></tab-control>
+    <goods-list :goods="showgoods"></goods-list>
   </div>
 </template>
 
@@ -67,6 +21,7 @@ import NavBar from "components/common/NavBar";
 import HomeRecommend from "./childcom/HomeRecommend.vue";
 import HomeSwiper from "./childcom/HomeSwiper.vue";
 import TabControl from "components/content/tabcontrol/TabControl.vue";
+import GoodsList from "components/content/goods/GoodsList.vue";
 
 import { getHomeMultidata, getHomeGoods } from "network/home";
 
@@ -77,6 +32,7 @@ export default {
     HomeSwiper,
     HomeRecommend,
     TabControl,
+    GoodsList,
   },
   data() {
     return {
@@ -88,8 +44,15 @@ export default {
         'new': { page: 0, list: [] },
         'sell': { page: 0, list: [] },
       },
+      currentype: "pop",
     };
   },
+  computed:{
+    showgoods(){
+      return this.goods[this.currentype].list
+    }
+  },
+  // 我们将网络请求封装在methods里面，然后在created函数中调用，逻辑更加清晰
   created() {
     // 请求轮播，推荐中的数据
     this.homemultidata();
@@ -100,7 +63,24 @@ export default {
     this.homegoods("sell");
   },
   methods: {
+    // 事件监听相关方法
+    tabclick(index) {
+      switch (index) {
+        case 0:
+          this.currentype = "pop";
+          break;
+        case 1:
+          this.currentype = "new";
+          break;
+        case 2:
+          this.currentype = "sell";
+          break;
+      }
+    },
+
+    // 网络请求相关方法
     homemultidata() {
+      // 网路请求封装在该方法中
       getHomeMultidata().then((res) => {
         // 将请求到的数据保存在data对象对应的变量中
         this.banner = res.data.data.banner.list;
@@ -108,12 +88,13 @@ export default {
       });
     },
     homegoods(type) {
-      const page = this.goods[type].page + 1;
+      // 网络请求封装同上
+      let page = this.goods[type].page + 1;
       getHomeGoods(page, type).then((res) => {
-        console.log(res);
-        this.goods[type].list.push(...res.data.list);
+        // console.log(res);
+        this.goods[type].list.push(...res.data.data.list);
         this.goods[type].page += 1;
-      });
+      })
     },
   },
 };
@@ -127,7 +108,7 @@ export default {
   top: 0;
   z-index: 3;
 }
-.swiper{
-  margin-top:44px;
+.swiper {
+  margin-top: 44px;
 }
 </style>

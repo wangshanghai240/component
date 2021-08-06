@@ -1,0 +1,31 @@
+.gooditem{
+    width:48%;
+    display:inline-block;
+    text-align: center;
+    margin:12px 1%;
+  }
+  .gooditem img{
+    width:100%;
+    max-width:100%;
+    border-radius:4px;
+  }
+  .gooditem .txt{
+    /* 多行文本打点效果 */
+    display:-webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp:1;
+    overflow:hidden;
+  }
+  .gooditem .oriprice{
+    text-decoration:line-through;
+    margin-right:7px;
+    color:#a0a0a0;
+  }
+  .gooditem .price{
+    color:#f40;
+    margin:0 4px 0 0;
+  }
+  .gooditem .shoucang img{
+    width:16px;
+    vertical-align: middle;
+  }

@@ -28,6 +28,7 @@ export default {
   methods: {
     show(index) {
       this.currentindex = index;
+      this.$emit('tabclick',index)
     },
   },
 };

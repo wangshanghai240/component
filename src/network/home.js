@@ -8,12 +8,12 @@ export function getHomeMultidata(){
     })
 }
 // 请求首页商品数据
-export function getHomeGoods(){
+export function getHomeGoods(page, type){
     return request({
         url:'/home/data',
         params:{
-            page,
-            type
+            type,
+            page
         }
     })
 }
