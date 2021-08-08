@@ -12,6 +12,6 @@ module.exports = {
             .set('views',resolve('src/views'))
             .set('network',resolve('src/network'))
             .set('assets',resolve('src/assets'))
+            .set('store',resolve('src/store'))
     },
-
 }

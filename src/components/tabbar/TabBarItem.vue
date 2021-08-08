@@ -1,30 +1,33 @@
 <template>
   <div class="tabar-item" @click='showitem'>
-      <slot name="item-icon"></slot>
-      <slot name='item-txt'></slot>
+    <div :class="{active:isactive}"><slot name="item-icon"></slot></div>
+    <!-- <div v-else :class="{active:isactive}"><slot name="item-icon-show"></slot></div> -->
+    <div :class="{active:isactive}"><slot name='item-txt'></slot></div>
   </div>
 </template>
 
 <script>
 export default {
   name:'TabBarItem',
+  data(){
+    return{
+      
+    }
+  },
   props:{
     path:String
   },
+  computed:{
+    isactive(){
+      // 判断处于活跃的路由是否有传过来的路径
+      return this.$route.path.indexOf(this.path) !== -1
+    }
+  },
   methods:{
     showitem(){
-      console.log('ccc')
       this.$router.push(this.path)
+      console.log(this.$route)
     },
-    clickshow(){
-      this.$router.push({
-        path:'/profile',
-        query:{
-          name:'wangshanghai',
-          age:18
-        }
-      })
-    }
   }
 }
 </script>
@@ -39,9 +42,12 @@ export default {
 }
 .tabar-item img{
   vertical-align: middle;
-  width:30px;
+  width:23px;
 }
 .tabar-item i{
-  font-size:18px;
+  font-size:22px;
+}
+.tabar-item .active{
+  color:rgb(161, 35, 56);
 }
 </style>
