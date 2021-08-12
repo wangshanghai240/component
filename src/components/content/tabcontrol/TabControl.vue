@@ -37,8 +37,6 @@ export default {
 <style>
 .tabcontrol {
   text-align: center;
-  position:sticky;
-  top:44px;
   background:#fff;
 }
 .tabcontrol .title {

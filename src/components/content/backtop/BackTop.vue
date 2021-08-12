@@ -1,8 +1,6 @@
 <template>
   <div class="backtop">
-      <a href="#">
-          <img src="~assets/img/top.png" alt="">
-      </a>
+    <img src="~assets/img/top.png" alt="error">
   </div>
 </template>
 
@@ -19,6 +17,8 @@ export default {
     right:10px;
 }
 .backtop img{
-    width:40px;
+    width:50px;
+    background:#fff;
+    border-radius:50%;
 }
 </style>
