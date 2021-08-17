@@ -59,7 +59,7 @@ export default {
 
       // 2.开启定时器
       this.startTimer();
-    }, 100);
+    }, 1000);
   },
   methods: {
     /**
@@ -232,7 +232,7 @@ export default {
 #hy-swiper {
   overflow: hidden;
   position: relative;
-  margin-top:44px;
+  /* margin-top:44px; */
 }
 
 .swiper {

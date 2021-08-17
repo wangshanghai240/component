@@ -3,16 +3,18 @@
     <GoodsListItem
       v-for="(item, index) in goods"
       :key="index"
+      @click.native = 'showgoods'
+      :goodsitem = 'item'
     >
-      <a :href="item.link" slot="img">
-        <img :src="item.show.img" :alt="item.title" />
-      </a>
+      <!-- <a :href="item.link" slot="img"> -->
+        <img :src="item.show.img" :alt="item.title" slot="img"/>
+      <!-- </a> -->
       <span class="txt" slot="txt">{{ item.title }}</span>
       <span class="oriprice" slot="oriprice">{{ item.orgPrice }}</span>
       <span class="price" slot="price">{{ item.price }}</span>
-      <span class="shoucang" slot="shoucang"
-        ><img src="~assets/img/shoucang.svg" alt="" />{{ item.cfav }}</span
-      >
+      <span class="shoucang" slot="shoucang">
+        <img src="~assets/img/shoucang.svg" alt="" />{{ item.cfav }}
+      </span>
     </GoodsListItem>
   </div>
 </template>
@@ -22,7 +24,12 @@ import GoodsListItem from "./GoodsListItem.vue";
 export default {
   name: "GoodsList",
   components: {
-    GoodsListItem,
+    GoodsListItem
+  },
+  data(){
+    return{
+      item:{}
+    }
   },
   props: {
     goods: {
@@ -32,12 +39,12 @@ export default {
       },
     },
   },
-  // methods: {
-  //   imgloads() {
-  //     console.log('imgload')
-  //     this.$bus.$emit("imgload");
-  //   },
-  // },
+  methods: {
+    showgoods(){
+      console.log(this.goods)
+      this.item = this.goods
+    }
+  },
 };
 </script>
 

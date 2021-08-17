@@ -13,7 +13,6 @@ export default {
     data(){
         return{
             scroll:null,
-            
         }
     },
     props:{
@@ -27,6 +26,7 @@ export default {
         }
     },
     mounted(){
+        // 创建better-scroll实例并传递给scroll
         this.scroll = new BScroll(this.$refs.wrapper,{
             pullUpLoad:this.pullUpLoad,
             click:true,

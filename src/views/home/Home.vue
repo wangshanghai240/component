@@ -4,6 +4,13 @@
     <nav-bar class="nav-bar">
       <div slot="center">购物街</div>
     </nav-bar>
+    <tab-control
+        :title="['流行', '新款', '精选']"
+        @tabclick="tabclick"
+        ref="tabcontrolone"
+        v-show="isfixed"
+        class="fixed"
+      ></tab-control>
     <scroll
       class="content"
       ref="scroll"
@@ -13,13 +20,14 @@
       @more="loadmore"
     >
       <!-- 轮播图组件 -->
-      <home-swiper :banners="banner" class="swiper"></home-swiper>
+      <home-swiper :banners="banner" class="swiper" ref="homeswiper" @offset='offsets'></home-swiper>
       <!-- 推荐组件 -->
       <home-recommend :recommend="recommend"></home-recommend>
       <!-- 切换栏 -->
       <tab-control
         :title="['流行', '新款', '精选']"
         @tabclick="tabclick"
+        ref="tabcontroltwo"
       ></tab-control>
       <!-- 商品列表 -->
       <goods-list :goods="showgoods"></goods-list>
@@ -63,9 +71,13 @@ export default {
         new: { page: 0, list: [] },
         sell: { page: 0, list: [] },
       },
-      // 给一个默认值
+      // type给一个默认值
       currentype: "pop",
       isscrollposition: false,
+      // tabcontrol的offsetTop默认值
+      offset:0,
+      // tabcontrol显隐
+      isfixed:false
     };
   },
   computed: {
@@ -90,6 +102,9 @@ export default {
     //   this.$refs.scroll.refresh();
     // });
   },
+  destoryed(){
+    console.log('卧槽，我被销毁了')
+  },
   methods: {
     // 事件监听相关方法
     // 子组件传值给父组件的时候，@tabclick='tabclick'这里不能有index参数，即@tabclick='tabclick(index)'，
@@ -106,14 +121,19 @@ export default {
           this.currentype = "sell";
           break;
       }
+      // 因为有两个tabcontrol,所以需要统一index，否则点击其中一个的tabcontrol，另外一个tabcontrol还是原来的那个index
+      this.$refs.tabcontrolone.currentindex = index;
+      this.$refs.tabcontroltwo.currentindex = index; 
     },
     // 回到顶部功能
     backtop() {
       this.$refs.scroll.scrollTo(0, 0);
     },
-    // 滚动位置backtop显隐
+    // 判断滚动位置backtop图标显隐
     scrollshow(position) {
       this.isscrollposition = (-position.y) > 1000;
+      // tabcontrol的显隐
+      this.isfixed = (-position.y) > this.offset
     },
     // 下拉加载更多
     loadmore() {
@@ -121,7 +141,13 @@ export default {
       this.homegoods(this.currentype);
       // this.$refs.scroll.refresh();
     },
-
+    // tabcontrol的offsetTop
+    offsets(){
+      // 每个组件都有一个属性：$el表示当前组件的template的root元素，例如在tabcontrol组件的template的div.tabcontrol
+      this.offset = (this.$refs.tabcontroltwo.$el.offsetTop - 44)
+      console.log(this.offset)
+      this.$refs.scroll.refresh()
+    },
     // 网络请求相关方法
     homemultidata() {
       // 网路请求封装在该方法中
@@ -162,5 +188,13 @@ export default {
 }
 .home .content {
   height: calc(100% - 93px);
+}
+.home .fixed{
+  width:100%;
+  position:absolute;
+  z-index:4;
+}
+.home .swiper{
+  margin-top:44px !important ;
 }
 </style>

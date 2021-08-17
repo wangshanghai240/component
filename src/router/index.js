@@ -7,6 +7,7 @@ const Home = () => import('views/home/Home')
 const Cart = () => import('views/cart/Cart')
 const Cate = () => import('views/cate/Cate')
 const Profile = () => import('views/profile/Profile')
+const Detail = () => import('views/detail/Detail')
 // 路由映射关系表
 let routes = [
     {
@@ -18,7 +19,7 @@ let routes = [
         component: Home
     },
     {
-        path: '/cate/',
+        path: '/cate',
         component: Cate
     },
     {
@@ -28,6 +29,10 @@ let routes = [
     {
         path: '/profile',
         component: Profile
+    },
+    {
+        path:'/detail',
+        component:Detail
     }
 ]
 // 创建路由对象
