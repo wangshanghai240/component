@@ -5,7 +5,7 @@ export function request(config){
     // 通过axios.create()创建请求实例
     let instance = axios.create({
         timeout:5000,
-        baseURL :'http://152.136.185.210:7878/api/m5',
+        baseURL :'http://152.136.185.210:7878/api/hy66',
     })
     // 拦截器，这个拦截器可以是全局的也可以是实例的请求拦截
     // axios.interceptors.request.use()

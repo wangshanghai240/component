@@ -4,9 +4,6 @@
         <div slot='left' class="left" @click='back'>
           <img src="~assets/img/back.svg" alt="error">
         </div>
-        <div class="center" slot='center'>
-          <span>分类</span>
-        </div>
       </navbar>
   </div>
 </template>

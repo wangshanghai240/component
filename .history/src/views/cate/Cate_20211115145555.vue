@@ -1,22 +1,13 @@
 <template>
   <div class="cate" ref="cate">
-      <navbar>
-        <div slot='left' class="left" @click='back'>
-          <img src="~assets/img/back.svg" alt="error">
-        </div>
-        <div class="center" slot='center'>
-          <span>分类</span>
-        </div>
-      </navbar>
+      
   </div>
 </template>
 
 <script>
-import navbar from 'components/common/NavBar.vue'
 import BScroll from 'better-scroll'
 export default {
     name:'cate',
-    components:{ navbar },
     data(){
       return{
         scroll:null
@@ -36,9 +27,6 @@ export default {
       })
     },
     methods:{
-      back(){
-        this.$router.back()
-      },
       btn(){
         console.log('ccc')
       }
@@ -50,8 +38,6 @@ export default {
 .cate{
   height:200px;
   overflow:hidden;
-}
-.cate .left img{
-  width:1.4em;
+  background:#d8d8d8;
 }
 </style>

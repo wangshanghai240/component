@@ -1,11 +1,8 @@
 <template>
   <div class="cate" ref="cate">
       <navbar>
-        <div slot='left' class="left" @click='back'>
+        <div slot='left' class="left">
           <img src="~assets/img/back.svg" alt="error">
-        </div>
-        <div class="center" slot='center'>
-          <span>分类</span>
         </div>
       </navbar>
   </div>
@@ -36,9 +33,6 @@ export default {
       })
     },
     methods:{
-      back(){
-        this.$router.back()
-      },
       btn(){
         console.log('ccc')
       }
@@ -52,6 +46,6 @@ export default {
   overflow:hidden;
 }
 .cate .left img{
-  width:1.4em;
+  font-size:.3em;
 }
 </style>

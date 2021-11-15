@@ -19,7 +19,6 @@ export default {
   height: 44px;
   line-height: 44px;
   text-align: center;
-  justify-content: center;
 }
 .left,
 .right {
