@@ -1,5 +1,6 @@
 <template>
   <div class="cate" ref="cate">
+    <!-- 导航 -->
       <navbar>
         <div slot='left' class="left" @click='back'>
           <img src="~assets/img/back.svg" alt="error">
@@ -8,6 +9,7 @@
           <span>分类</span>
         </div>
       </navbar>
+      
   </div>
 </template>
 
