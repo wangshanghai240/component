@@ -7,7 +7,7 @@
     <div class="message">
       <div class="shop aaa">
         <div class="shopcount ccc">
-          <div>{{ shopinfo.sells }}</div>
+          <div>{{ shopinfo.sells | csells}}</div>
           <span>总销量</span>
         </div>
         <div class="shoprepect ccc">
@@ -20,6 +20,9 @@
           <span>{{ item.name }}</span>
           <span>{{ item.score }}</span>
         </div>
+      </div>
+      <div class="btnstr">
+        <div class="str"><span>进店逛逛</span></div>
       </div>
     </div>
   </div>
@@ -36,6 +39,13 @@ export default {
       },
     },
   },
+  // 过滤器格式化数据
+  filters:{
+    csells(value){
+      let s = (value/10000).toFixed(2) + '万'
+      return s
+    }
+  }
 };
 </script>
 
@@ -89,5 +99,19 @@ export default {
 }
 .scores .score span{
     padding:0 5px;
+}
+.btnstr{
+  position:relative;
+  top:.3em;
+  left:50%;
+  transform:translateX(-50%);
+  display:inline-block;
+  text-align:center;
+  margin:.3em 0;
+  border:1px solid #d0d0d0;
+  border-radius:.3em;
+  box-sizing: border-box;
+  background:#f0f0f0;
+  padding:.23em .4em;
 }
 </style>
