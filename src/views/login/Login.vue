@@ -42,17 +42,17 @@ export default {
 <style scoped>
 /* FIXME：这里有一个问题需要解决：定位父级无法包裹子元素，导致按钮跑出去 */
 .login {
+  display:inline-block;
   width: 80%;
-  position: relative;
-  top:4 0%;
+  position: absolute;
+  top:40%;
   left:50%;
-  transform:translate(-50% -50%);
+  transform:translate(-50%,-50%);
   border: 1px solid #d0d0d0;
   box-shadow: 0 0 4px 2px #d0d0d0;
   border-radius: 0.3em;
   box-sizing: border-box;
   padding: 0.2em 0.23em;
-  margin: 10em auto 0;
 }
 /* .login .username{
 	position:absolute;
@@ -83,13 +83,13 @@ export default {
   border-bottom-color: rgb(216, 45, 45);
 }
 .btn {
-  display: inline-block;
-  margin: 1.1em 0;
+  /* display: inline-block; */
+  width:30%;
+  margin: 1.1em auto;
   text-align: center;
-  position: absolute;
-  top: 80%;
-  left: 50%;
-  transform: translateX(-50%);
+  /* position: absolute; */
+  
+  /* transform: translateX(-50%); */
 }
 .btn .button {
   border: 1px solid #335fbd;
