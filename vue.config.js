@@ -13,5 +13,6 @@ module.exports = {
             .set('network',resolve('src/network'))
             .set('assets',resolve('src/assets'))
             .set('store',resolve('src/store'))
+            .set('utils', resolve('src/utils'))
     }
 }

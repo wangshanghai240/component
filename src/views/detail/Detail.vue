@@ -1,13 +1,14 @@
 <template>
   <div class="detail">
     <detail-nav-bar />
-    <scroll class='content'>
-      <detail-swiper :detailswiper="topimgs" />
-      <detail-base-info :goodsInfo="goodsList" />
-      <detail-shop-info :shopinfo="shop" />
-      <detail-goods-info :goodsinfo="detailinfo"></detail-goods-info>
-      <detail-params :params='detailparams'></detail-params>
-    </scroll>
+    <detail-swiper :detailswiper="topimgs" />
+    <!-- 评论 -->
+    
+    <detail-base-info :goodsInfo="goodsList" />
+    <comment :cominfo='comment'></comment>
+    <detail-shop-info :shopinfo="shop" />
+    <detail-goods-info :goodsinfo="detailinfo"></detail-goods-info>
+    <detail-params :params="detailparams"></detail-params>
   </div>
 </template>
 
@@ -15,10 +16,11 @@
 import DetailNavBar from "./childComps/DetailNavBar.vue";
 import DetailBaseInfo from "./childComps/DetailBaseInfo.vue";
 import DetailSwiper from "./childComps/DetailSwiper.vue";
-import Scroll from "components/common/scroll/Scroll.vue";
+// import Scroll from "components/common/scroll/Scroll.vue";
 import DetailShopInfo from "./childComps/DetailShopInfo.vue";
-import DetailGoodsInfo from './childComps/DetailGoodsInfo.vue'
-import DetailParams from './childComps/DetailParams.vue'
+import DetailGoodsInfo from "./childComps/DetailGoodsInfo.vue";
+import DetailParams from "./childComps/DetailParams.vue";
+import Comment from './childComps/Comment.vue'
 
 import { getDetailData, Goods, Shop } from "network/detail";
 
@@ -28,23 +30,31 @@ export default {
     DetailSwiper,
     DetailBaseInfo,
     DetailShopInfo,
-    Scroll,
+    // Scroll,
     DetailGoodsInfo,
-    DetailParams
+    DetailParams,
+    Comment
   },
   name: "Detail",
   data() {
     return {
       iid: null,
+      // 轮播图
       topimgs: [],
+      // 商品列表
       goodsList: {},
+      // 店铺
       shop: {},
-      detailinfo:{},
-      detailparams:{}
+      // 详细数据
+      detailinfo: {},
+      // 数据
+      detailparams: {},
+      // 评论
+      comment:{}
     };
   },
   // TODO:here is todo
-  created() { 
+  created() {
     // 将动态路由中的iid保存在data中
     this.iid = this.$route.query.iid;
   },
@@ -61,8 +71,12 @@ export default {
         res.data.result.shopInfo.services
       );
       this.shop = new Shop(res.data.result.shopInfo);
-      this.detailinfo = res.data.result.detailInfo
-      this.detailparams = res.data.result.itemParams
+      this.detailinfo = res.data.result.detailInfo;
+      this.detailparams = res.data.result.itemParams;
+      // 获取评论
+      if(res.data.result.rate.cRate){
+        this.comment = res.data.result.rate
+      }
     });
   },
 };
