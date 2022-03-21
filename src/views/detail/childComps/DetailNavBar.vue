@@ -12,7 +12,7 @@
           @click="showindex(index)"
           :class="{ active: currentindex == index }"
         >
-          {{ item }}
+          <span>{{ item }}</span>
         </div>
       </div>
     </nav-bar>
@@ -25,7 +25,7 @@ export default {
   components: { NavBar },
   data() {
     return {
-      title: ["商品", "参数", "评论", "推荐"],
+      title: ["商品", "评论", "参数", "推荐"],
       currentindex: 0,
     };
   },
@@ -38,6 +38,7 @@ export default {
     // 点击激活对应标签
     showindex(index) {
       this.currentindex = index;
+      window.scrollTo(0,1200)
     },
   },
 };
@@ -68,5 +69,9 @@ export default {
 }
 .active {
   color: #f20;
+}
+.active span{
+  padding-bottom:.23em;
+  border-bottom:.13em solid #f20;
 }
 </style>

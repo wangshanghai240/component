@@ -24,7 +24,7 @@
 </template>
 
 <script>
-import formaTime from "utils/formatTime";
+// import formaTime from "utils/formatTime";
 export default {
   props: {
     cominfo: {
@@ -40,8 +40,11 @@ export default {
   filters: {
     // 格式化时间
     format(t) {
-      formaTime(t);
-    //   console.log(formaTime(t));
+      let date = new Date(t),
+          y = date.getFullYear(),
+          m = date.getMonth() + 1 ,
+          d = date.getDate()
+          return `${y}/` + `${m}/` + `${d}`
     },
   },
   methods: {
@@ -81,7 +84,9 @@ export default {
 .comm .userall .user .avtor {
   width: 9%;
   border-radius: 50%;
+  /* 图片在盒子的前面 */
   overflow: hidden;
+  margin-right:.3em;
 }
 .user .avtor img {
   width: 100%;
@@ -89,10 +94,12 @@ export default {
   vertical-align: middle;
 }
 .user .one .uid {
-  color: #adadad;
+  color: #7a7a7a;
   font-size: 0.78em;
 }
 .user .one .time{
     font-size:.78em;
+    margin:.2em 0;
+    color:#7e7e7e;
 }
 </style>

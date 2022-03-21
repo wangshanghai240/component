@@ -2,12 +2,14 @@
   <div class="detail">
     <detail-nav-bar />
     <detail-swiper :detailswiper="topimgs" />
-    <!-- 评论 -->
-    
     <detail-base-info :goodsInfo="goodsList" />
+    <!-- 评论 -->
     <comment :cominfo='comment'></comment>
+    <!-- 店铺信息 -->
     <detail-shop-info :shopinfo="shop" />
+    <!-- 店铺商品 -->
     <detail-goods-info :goodsinfo="detailinfo"></detail-goods-info>
+    <!-- 参数信息 -->
     <detail-params :params="detailparams"></detail-params>
   </div>
 </template>
