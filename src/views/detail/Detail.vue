@@ -81,10 +81,14 @@ export default {
       }
     });
   },
+  methods:{}
 };
 </script>
 
 <style scoped>
+.detail{
+  overflow:hidden;
+}
 .detail .content {
   overflow: hidden;
   height: calc(100% - 44px);
