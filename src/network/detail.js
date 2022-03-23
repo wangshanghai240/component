@@ -9,7 +9,12 @@ export function getDetailData(iid){
         }
     })
 }
-
+// 获取推荐列表数据
+export function getRecommend(){
+    return request({
+        url:'/recommend',
+    })
+}
 export class Goods{
     constructor(itemInfo,columns,services){
         this.title = itemInfo.title;

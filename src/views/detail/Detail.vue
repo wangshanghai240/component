@@ -11,6 +11,8 @@
     <detail-goods-info :goodsinfo="detailinfo"></detail-goods-info>
     <!-- 参数信息 -->
     <detail-params :params="detailparams"></detail-params>
+    <!-- 推荐 -->
+    <recommend :recommend='recom'></recommend>
   </div>
 </template>
 
@@ -18,13 +20,13 @@
 import DetailNavBar from "./childComps/DetailNavBar.vue";
 import DetailBaseInfo from "./childComps/DetailBaseInfo.vue";
 import DetailSwiper from "./childComps/DetailSwiper.vue";
-// import Scroll from "components/common/scroll/Scroll.vue";
 import DetailShopInfo from "./childComps/DetailShopInfo.vue";
 import DetailGoodsInfo from "./childComps/DetailGoodsInfo.vue";
 import DetailParams from "./childComps/DetailParams.vue";
-import Comment from './childComps/Comment.vue'
+import Comment from './childComps/Comment.vue';
+import Recommend from './childComps/Recommend.vue'
 
-import { getDetailData, Goods, Shop } from "network/detail";
+import { getDetailData, getRecommend, Goods, Shop } from "network/detail";
 
 export default {
   components: {
@@ -35,7 +37,8 @@ export default {
     // Scroll,
     DetailGoodsInfo,
     DetailParams,
-    Comment
+    Comment,
+    Recommend
   },
   name: "Detail",
   data() {
@@ -48,17 +51,24 @@ export default {
       // 店铺
       shop: {},
       // 详细数据
-      detailinfo: {},
+      detailinfo: [],
       // 数据
       detailparams: {},
       // 评论
-      comment:{}
+      comment:{},
+      // 推荐
+      recom:[]
     };
   },
   // TODO:here is todo
   created() {
     // 将动态路由中的iid保存在data中
     this.iid = this.$route.query.iid;
+    //发起请求获取数据
+    getRecommend().then((res)=>{
+      console.log(res)
+      this.recom = res.data.data.list
+    })
   },
   mounted() {
     // 根据iid请求数据

@@ -32,9 +32,7 @@ export default {
     };
   },
   watch:{
-    'offset = window.scrollY'(){
-        
-      }
+    
   },
   methods: {
     // 返回首页,有两种方式，go或者back
@@ -47,6 +45,7 @@ export default {
       // 移除监听
       window.removeEventListener("scroll", this.scr);
       this.offset = window.scrollY
+      // setTimeout(window.addEventListener('scroll', this.scr, false),800)
       this.currentindex = index;
       // 点击标签滚动到对应的位置
       switch (index) {
@@ -107,7 +106,7 @@ export default {
     this.offset = window.scrollY
   },
   beforeDestroy() {
-    window.removeEventListener();
+    window.removeEventListener('scroll', this.scr);
   },
 };
 </script>
