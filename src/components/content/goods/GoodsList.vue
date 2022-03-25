@@ -7,7 +7,7 @@
       :goodsitem="items" 
     > 
       <!-- <a :href="item.link" slot="img"> -->
-      <img :src="items.show.img" :alt="items.title" slot="img" />
+      <img :src="items.show.img" :alt="items.title" slot="img"/>
       <!-- </a> -->
       <span class="txt" slot="txt">{{ items.title }}</span>
       <span class="oriprice" slot="oriprice">{{ items.orgPrice }}</span>

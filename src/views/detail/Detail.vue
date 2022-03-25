@@ -1,18 +1,20 @@
 <template>
   <div class="detail">
-    <detail-nav-bar />
+    <detail-nav-bar @navindex="itemindex" />
+    <!-- 轮播图 -->
     <detail-swiper :detailswiper="topimgs" />
+    <!-- 价格等信息 -->
     <detail-base-info :goodsInfo="goodsList" />
     <!-- 评论 -->
-    <comment :cominfo='comment'></comment>
+    <comment :cominfo="comment" ref="comment"></comment>
     <!-- 店铺信息 -->
     <detail-shop-info :shopinfo="shop" />
     <!-- 店铺商品 -->
-    <detail-goods-info :goodsinfo="detailinfo"></detail-goods-info>
+    <detail-goods-info :goodsinfo="detailinfo" ref="params" ></detail-goods-info>
     <!-- 参数信息 -->
     <detail-params :params="detailparams"></detail-params>
     <!-- 推荐 -->
-    <recommend :recommend='recom'></recommend>
+    <recommend :recommend="recom" ref="recommend"></recommend>
   </div>
 </template>
 
@@ -23,8 +25,8 @@ import DetailSwiper from "./childComps/DetailSwiper.vue";
 import DetailShopInfo from "./childComps/DetailShopInfo.vue";
 import DetailGoodsInfo from "./childComps/DetailGoodsInfo.vue";
 import DetailParams from "./childComps/DetailParams.vue";
-import Comment from './childComps/Comment.vue';
-import Recommend from './childComps/Recommend.vue'
+import Comment from "./childComps/Comment.vue";
+import Recommend from "./childComps/Recommend.vue";
 
 import { getDetailData, getRecommend, Goods, Shop } from "network/detail";
 
@@ -38,7 +40,7 @@ export default {
     DetailGoodsInfo,
     DetailParams,
     Comment,
-    Recommend
+    Recommend,
   },
   name: "Detail",
   data() {
@@ -55,9 +57,11 @@ export default {
       // 数据
       detailparams: {},
       // 评论
-      comment:{},
+      comment: {},
       // 推荐
-      recom:[]
+      recom: [],
+      // offsetTop
+      componentOffsetTop: [],
     };
   },
   // TODO:here is todo
@@ -65,10 +69,10 @@ export default {
     // 将动态路由中的iid保存在data中
     this.iid = this.$route.query.iid;
     //发起请求获取数据
-    getRecommend().then((res)=>{
-      console.log(res)
-      this.recom = res.data.data.list
-    })
+    getRecommend().then((res) => {
+      console.log(res);
+      this.recom = res.data.data.list;
+    });
   },
   mounted() {
     // 根据iid请求数据
@@ -86,18 +90,37 @@ export default {
       this.detailinfo = res.data.result.detailInfo;
       this.detailparams = res.data.result.itemParams;
       // 获取评论
-      if(res.data.result.rate.cRate){
-        this.comment = res.data.result.rate
+      if (res.data.result.rate.cRate) {
+        this.comment = res.data.result.rate;
       }
+      this.$nextTick(() => {
+        // 虽然DOM渲染出来了但是图片却没有
+        // 它会导致offsetTop的值出现误差
+        this.componentOffsetTop = [];
+        this.componentOffsetTop.push(0);
+        this.componentOffsetTop.push(this.$refs.comment.$el.offsetTop-44);
+        this.componentOffsetTop.push(this.$refs.params.$el.offsetTop-44);
+        this.componentOffsetTop.push(this.$refs.recommend.$el.offsetTop-44);
+        console.log(this.componentOffsetTop);
+      });
     });
   },
-  methods:{}
+  methods: {
+    itemindex(t) {
+      console.log(t);
+      window.scrollTo({
+        left:0,
+        top:this.componentOffsetTop[t],
+        behavior:"smooth"
+      })
+    },
+  },
 };
 </script>
 
 <style scoped>
-.detail{
-  overflow:hidden;
+.detail {
+  overflow: hidden;
 }
 .detail .content {
   overflow: hidden;

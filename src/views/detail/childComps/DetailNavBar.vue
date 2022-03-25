@@ -47,63 +47,64 @@ export default {
       this.offset = window.scrollY
       // setTimeout(window.addEventListener('scroll', this.scr, false),800)
       this.currentindex = index;
+      this.$emit('navindex',index)
       // 点击标签滚动到对应的位置
-      switch (index) {
-        case 0:
-          window.scrollTo({
-            top: 0,
-            left: 0,
-            behavior: "smooth",
-          });
-          break;
-        case 1:
-          window.scrollTo({
-            top: 430,
-            left: 0,
-            behavior: "smooth",
-          });
-          break;
-        case 2:
-          window.scrollTo({
-            top: 800,
-            left: 0,
-            behavior: "smooth",
-          });
-          break;
-        case 3:
-          window.scrollTo({
-            top: 8700,
-            left: 0,
-            behavior: "smooth",
-          });
-          break;
-      }
+      // switch (index) {
+      //   case 0:
+      //     window.scrollTo({
+      //       top: 0,
+      //       left: 0,
+      //       behavior: "smooth",
+      //     });
+      //     break;
+      //   case 1:
+      //     window.scrollTo({
+      //       top: 430,
+      //       left: 0,
+      //       behavior: "smooth",
+      //     });
+      //     break;
+      //   case 2:
+      //     window.scrollTo({
+      //       top: 800,
+      //       left: 0,
+      //       behavior: "smooth",
+      //     });
+      //     break;
+      //   case 3:
+      //     window.scrollTo({
+      //       top: 8700,
+      //       left: 0,
+      //       behavior: "smooth",
+      //     });
+      //     break;
+      // }
     },
-    scr() {
-      this.title.forEach((item, index) => {
-        this.index = index;
-      });
-      if (window.scrollY < 430) {
-        this.index = 0;
-        this.currentindex = this.index;
-      } else if (window.scrollY < 800 && window.scrollY >= 430) {
-        this.index = 1;
-        this.currentindex = this.index;
-      } else if (window.scrollY >= 800 && window.scrollY < 8700) {
-        this.index = 2;
-        this.currentindex = this.index;
-      } else if (window.scrollY >= 8700) {
-        this.index = 3;
-        this.currentindex = this.index;
-      }
-      console.log(window.scrollY)
-      console.log(document.documentElement.clientHeight)
-    }
+    // scr() {
+    //   this.title.forEach((item, index) => {
+    //     this.index = index;
+    //   });
+    //   if (window.scrollY < 430) {
+    //     this.index = 0;
+    //     this.currentindex = this.index;
+    //   } else if (window.scrollY < 800 && window.scrollY >= 430) {
+    //     this.index = 1;
+    //     this.currentindex = this.index;
+    //   } else if (window.scrollY >= 800 && window.scrollY < 8700) {
+    //     this.index = 2;
+    //     this.currentindex = this.index;
+    //   } else if (window.scrollY >= 8700) {
+    //     this.index = 3;
+    //     this.currentindex = this.index;
+    //   }
+    //   console.log(window.scrollY)
+    //   console.log(document.documentElement.clientHeight)
+    // }
   },
   created() {
     // 监听滚动
-    window.addEventListener("scroll", this.scr, false);
-    this.offset = window.scrollY
+    // window.addEventListener("scroll", this.scr, false);
+    // this.offset = window.scrollY
   },
   beforeDestroy() {
     window.removeEventListener('scroll', this.scr);
