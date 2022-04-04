@@ -11,6 +11,11 @@
     <div class="btn" @click="login">
       <div class="button">登陆</div>
     </div>
+    <div class="logup">
+      <div class="zhuce">
+        <router-link to='/logup'>还未注册?</router-link>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -99,5 +104,17 @@ export default {
   background: #335fbd;
   color: #fff;
   box-shadow: 0 0 4px 2px #335fbd;
+}
+/* 注册 */
+.login .logup{
+  float:right;
+}
+.logup .c{
+  display:inline-block
+}
+.logup .zhuce a{
+  text-decoration:none;
+  color:#f30;
+  padding:.2em .8em;
 }
 </style>
