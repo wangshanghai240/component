@@ -1,6 +1,6 @@
 <template>
   <div class="detail">
-    <detail-nav-bar @navindex="itemindex" />
+    <detail-nav-bar @navindex="itemindex" ref="nav" />
     <!-- 轮播图 -->
     <detail-swiper :detailswiper="topimgs" />
     <!-- 价格等信息 -->
@@ -10,7 +10,11 @@
     <!-- 店铺信息 -->
     <detail-shop-info :shopinfo="shop" />
     <!-- 店铺商品 -->
-    <detail-goods-info :goodsinfo="detailinfo" ref="params" ></detail-goods-info>
+    <detail-goods-info
+      :goodsinfo="detailinfo"
+      ref="params"
+      @loadallimg="loaddetailimg"
+    ></detail-goods-info>
     <!-- 参数信息 -->
     <detail-params :params="detailparams"></detail-params>
     <!-- 推荐 -->
@@ -29,7 +33,7 @@ import Comment from "./childComps/Comment.vue";
 import Recommend from "./childComps/Recommend.vue";
 
 import { getDetailData, getRecommend, Goods, Shop } from "network/detail";
-
+import { debounce } from "utils/debounce";
 export default {
   components: {
     DetailNavBar,
@@ -53,7 +57,7 @@ export default {
       // 店铺
       shop: {},
       // 详细数据
-      detailinfo: [],
+      detailinfo: {},
       // 数据
       detailparams: {},
       // 评论
@@ -62,6 +66,7 @@ export default {
       recom: [],
       // offsetTop
       componentOffsetTop: [],
+      index: 0,
     };
   },
   // TODO:here is todo
@@ -73,6 +78,21 @@ export default {
       console.log(res);
       this.recom = res.data.data.list;
     });
+    // 防抖
+    this.getdebounce = debounce(() => {
+      this.componentOffsetTop = [];
+      this.componentOffsetTop.push(0);
+      this.componentOffsetTop.push(this.$refs.comment.$el.offsetTop - 44);
+      this.componentOffsetTop.push(this.$refs.params.$el.offsetTop - 44);
+      this.componentOffsetTop.push(this.$refs.recommend.$el.offsetTop - 44);
+      console.log(this.componentOffsetTop);
+    },100);
+    // 监听滚动，注意退出组件之后需要销毁监听事件
+    this.addevent();
+  },
+  destroyed(){
+    // 销毁组件移除事件监听
+    window.removeEventListener('scroll', this.contentindex)
   },
   mounted() {
     // 根据iid请求数据
@@ -93,26 +113,45 @@ export default {
       if (res.data.result.rate.cRate) {
         this.comment = res.data.result.rate;
       }
-      this.$nextTick(() => {
-        // 虽然DOM渲染出来了但是图片却没有
-        // 它会导致offsetTop的值出现误差
-        this.componentOffsetTop = [];
-        this.componentOffsetTop.push(0);
-        this.componentOffsetTop.push(this.$refs.comment.$el.offsetTop-44);
-        this.componentOffsetTop.push(this.$refs.params.$el.offsetTop-44);
-        this.componentOffsetTop.push(this.$refs.recommend.$el.offsetTop-44);
-        console.log(this.componentOffsetTop);
-      });
     });
   },
   methods: {
+    loaddetailimg() {
+      this.$nextTick(() => {
+        // 虽然DOM渲染出来了但是图片却没有
+        // 它会导致offsetTop的值出现误差
+        this.getdebounce()
+      });
+    },
     itemindex(t) {
       console.log(t);
       window.scrollTo({
-        left:0,
-        top:this.componentOffsetTop[t],
-        behavior:"smooth"
-      })
+        left: 0,
+        top: this.componentOffsetTop[t],
+        behavior: "smooth",
+      });
+    },
+    contentindex() {
+      // console.log(window.scrollY);
+      let position = window.scrollY,
+        length = this.componentOffsetTop.length;
+      for (let i = 0; i < length; i++) {
+        // 注意i处于边界的情况，此时position要大于该组件所处的offsetTop
+        if (
+          this.currentindex !== i &&
+          ((i < length - 1 &&
+            position >= this.componentOffsetTop[i] &&
+            position < this.componentOffsetTop[i + 1]) ||
+            (i === length - 1 && position >= this.componentOffsetTop[i]))
+        ) {
+          // console.log(i);
+          this.index = i;
+          this.$refs.nav.currentindex = this.index;
+        }
+      }
+    },
+    addevent() {
+      window.addEventListener("scroll", this.contentindex, false);
     },
   },
 };

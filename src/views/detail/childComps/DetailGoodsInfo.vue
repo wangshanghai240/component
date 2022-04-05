@@ -9,7 +9,7 @@
           <div class="effect" v-for='item of goodsinfo.detailImage' :key='item.key'>
               <div class="eff c">{{item.key}}</div>
               <div class="list" v-for='(img, index) of item.list' :key='index'>
-                  <img :src="img" alt="">
+                  <img :src="img" alt="" @load='loadimg'>
               </div>
           </div>
       </div>
@@ -21,9 +21,9 @@ export default {
   name: "DetailGoodsInfo",
   props: {
     goodsinfo: {
-      type: Array,
+      type: Object,
       default() {
-        return [];
+        return {};
       },
     },
   },
@@ -37,7 +37,11 @@ export default {
           return Object.keys(this.goodsinfo).length !== 0
       }
   },
-  methods:{}
+  methods:{
+      loadimg(){
+          this.$emit('loadallimg')
+      }
+  }
 };
 </script>
 

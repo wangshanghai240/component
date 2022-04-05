@@ -57,6 +57,7 @@
 .logup #userid,
 .logup #password {
   display: inline-block;
+  
 }
 .logup #userid input, #password input {
   outline: none;
@@ -64,6 +65,7 @@
   border-bottom:.1em solid #aaa;
   padding:.34em 0;
   background:none;
+  width:70vw;
 }
 #userid input:focus, #password input:focus{
   border-bottom:.1em solid rgb(26, 26, 208);
