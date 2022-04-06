@@ -65,7 +65,7 @@
   border-bottom:.1em solid #aaa;
   padding:.34em 0;
   background:none;
-  width:70vw;
+  width:50vw;
 }
 #userid input:focus, #password input:focus{
   border-bottom:.1em solid rgb(26, 26, 208);

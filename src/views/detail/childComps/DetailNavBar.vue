@@ -25,7 +25,7 @@ export default {
   components: { NavBar },
   data() {
     return {
-      title: ["商品", "评论", "参数", "推荐"],
+      title: ["商品", "评论", "详情", "推荐"],
       currentindex: 0,
       index: 0,
       offset:0

@@ -19,6 +19,8 @@
     <detail-params :params="detailparams"></detail-params>
     <!-- 推荐 -->
     <recommend :recommend="recom" ref="recommend"></recommend>
+    <!-- 底部工具栏 -->
+    <detail-bottom-nav></detail-bottom-nav>
   </div>
 </template>
 
@@ -31,6 +33,7 @@ import DetailGoodsInfo from "./childComps/DetailGoodsInfo.vue";
 import DetailParams from "./childComps/DetailParams.vue";
 import Comment from "./childComps/Comment.vue";
 import Recommend from "./childComps/Recommend.vue";
+import DetailBottomNav from './childComps/DetailBottomNav.vue'
 
 import { getDetailData, getRecommend, Goods, Shop } from "network/detail";
 import { debounce } from "utils/debounce";
@@ -45,6 +48,7 @@ export default {
     DetailParams,
     Comment,
     Recommend,
+    DetailBottomNav
   },
   name: "Detail",
   data() {
@@ -163,7 +167,7 @@ export default {
 }
 .detail .content {
   overflow: hidden;
-  height: calc(100% - 44px);
+  height: calc(100% -44px);
   margin-bottom: 44px;
 }
 </style>

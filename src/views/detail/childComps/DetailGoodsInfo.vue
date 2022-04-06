@@ -46,6 +46,9 @@ export default {
 </script>
 
 <style scoped>
+.goodsinfo{
+    /* margin-bottom:7vh; */
+}
 .goodsinfo .c{
     display:inline-block;
     border-left:.35em solid rgba(221, 31, 31, 0.867);
