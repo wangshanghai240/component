@@ -20,7 +20,7 @@
     <!-- 推荐 -->
     <recommend :recommend="recom" ref="recommend"></recommend>
     <!-- 底部工具栏 -->
-    <detail-bottom-nav></detail-bottom-nav>
+    <detail-bottom-nav @addcart='adcart'></detail-bottom-nav>
   </div>
 </template>
 
@@ -120,6 +120,7 @@ export default {
     });
   },
   methods: {
+    // 等图片加载完毕
     loaddetailimg() {
       this.$nextTick(() => {
         // 虽然DOM渲染出来了但是图片却没有
@@ -135,6 +136,7 @@ export default {
         behavior: "smooth",
       });
     },
+    // 滚动屏幕对应tab
     contentindex() {
       // console.log(window.scrollY);
       let position = window.scrollY,
@@ -157,6 +159,15 @@ export default {
     addevent() {
       window.addEventListener("scroll", this.contentindex, false);
     },
+    adcart(){
+      // 添加购物车获取所有信息
+      let productstore = {}
+      productstore.img = this.topimgs[0]
+      productstore.desc = this.detailinfo.desc
+      productstore.price = this.goodsList.price
+      productstore.iid = this.$route.query.iid
+      console.log(productstore.iid);
+    }
   },
 };
 </script>
@@ -164,6 +175,9 @@ export default {
 <style scoped>
 .detail {
   overflow: hidden;
+}
+.detail::-webkit-scrollbar{
+  width:none !important;
 }
 .detail .content {
   overflow: hidden;

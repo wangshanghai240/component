@@ -38,8 +38,8 @@ Vue.use(vuerouter)
 // 创建路由对象
 let routes = []
 // 导入模块路由
-const moduleRouter = require.context('./module',true,/\.js$/)
-moduleRouter.keys().forEach(item=>{
+const moduleRouter = require.context('./module', true, /\.js$/)
+moduleRouter.keys().forEach(item => {
     routes = routes.concat(moduleRouter(item).default)
 })
 let router = new vuerouter({
@@ -52,6 +52,16 @@ const originalPush = vuerouter.prototype.push
 vuerouter.prototype.push = function push(location) {
     return originalPush.call(this, location).catch(err => err)
 }
-
+// 路由导航
+router.beforeEach((to, from, next) => {
+    console.log(to);
+    if(to.name === 'profile'){
+        if(sessionStorage.getItem !== null) next()
+        else next({name:'login'})
+    }else next({
+        fullpath:'/login'
+    })
+    next()
+})
 // 导出路由对象，暴露接口
 export default router

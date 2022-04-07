@@ -15,7 +15,7 @@
       </div>
     </div>
     <div class="bar-right">
-        <div class="cart c">加入购物车</div>
+        <div class="cart c" @click='addCart'>加入购物车</div>
         <div class="buy c" @click='buy'>购买</div>
     </div>
   </div>
@@ -23,10 +23,14 @@
 
 <script>
 export default {
+  mixins:[],
     data(){
         return {}
     },
     methods:{
+      addCart(){
+        this.$emit('addcart')
+      },
         buy(){
             alert('现在还不能购买哟！')
         }

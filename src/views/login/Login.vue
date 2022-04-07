@@ -35,8 +35,10 @@ export default {
     login() {
 		if(this.form.pwd === '' || this.form.username === ''){
 			alert('用户名或者密码不能为空')
+      
 		}else{
-			this.$router.push("./home");
+      sessionStorage.setItem(this.form.username,JSON.stringify(this.form.pwd))
+			this.$router.push("./profile");
 		}
       
     },
@@ -83,6 +85,7 @@ export default {
   border: none;
   padding-bottom: 0.1em;
   border-bottom: 0.1em solid rgb(14, 5, 5);
+  background:none;
 }
 .login .one input:focus {
   border-bottom-color: rgb(216, 45, 45);
