@@ -181,6 +181,7 @@ export default {
   background: #f50;
   color: #fff;
   border-radius: 0.9em;
+  box-shadow:0 0 .16em .1em #f50;
 }
 /* 订单 */
 .my {

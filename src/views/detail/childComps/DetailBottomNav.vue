@@ -29,7 +29,7 @@ export default {
     },
     methods:{
       addCart(){
-        this.$emit('addcart')
+        this.$emit('addcartp')
       },
         buy(){
             alert('现在还不能购买哟！')

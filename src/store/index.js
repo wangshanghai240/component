@@ -30,7 +30,8 @@ const state = {
             age: 24
         }
     ],
-    counter: 1000
+    counter: 1000,
+    cart:[]
 }
 // 创建vuex对象
 let store = new vuex.Store({

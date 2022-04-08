@@ -19,6 +19,7 @@ export class Goods{
     constructor(itemInfo,columns,services){
         this.title = itemInfo.title;
         this.price = itemInfo.price;
+        this.lowNowPrice = itemInfo.lowNowPrice
         this.oldPrice = itemInfo.oldPrice;
         this.discount = itemInfo.discountDesc
         this.discountBgColor = itemInfo.discountBgColor

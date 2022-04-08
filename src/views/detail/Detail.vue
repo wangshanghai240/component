@@ -20,7 +20,7 @@
     <!-- 推荐 -->
     <recommend :recommend="recom" ref="recommend"></recommend>
     <!-- 底部工具栏 -->
-    <detail-bottom-nav @addcart='adcart'></detail-bottom-nav>
+    <detail-bottom-nav @addcartp='adcart'></detail-bottom-nav>
   </div>
 </template>
 
@@ -37,6 +37,7 @@ import DetailBottomNav from './childComps/DetailBottomNav.vue'
 
 import { getDetailData, getRecommend, Goods, Shop } from "network/detail";
 import { debounce } from "utils/debounce";
+// import { mapActions } from 'vuex'
 export default {
   components: {
     DetailNavBar,
@@ -160,13 +161,18 @@ export default {
       window.addEventListener("scroll", this.contentindex, false);
     },
     adcart(){
-      // 添加购物车获取所有信息
+      // 添加购物车所需要的信息
       let productstore = {}
       productstore.img = this.topimgs[0]
       productstore.desc = this.detailinfo.desc
-      productstore.price = this.goodsList.price
-      productstore.iid = this.$route.query.iid
+      productstore.price = this.goodsList.lowNowPrice
+      // productstore.iid = this.$route.query.iid
+      productstore.iid = this.iid
+      // productstore.count = 0
       console.log(productstore.iid);
+      // 提交信息
+      this.$store.dispatch('cartadd',productstore)
+      // console.log(productstore);
     }
   },
 };

@@ -15,7 +15,7 @@
         <!-- <img src="assets/img/tabbar/gouwuche.png" alt=""> -->
         <div slot="item-txt">购物车</div>
       </TabBarItem>
-      <TabBarItem path='/profile'>
+      <TabBarItem path='/login'>
         <i class='iconfont icon-wodedangxuan' slot="item-icon"></i>
         <!-- <img src="assets/img/tabbar/wode.png" alt=""> -->
         <div slot="item-txt">我的</div>
