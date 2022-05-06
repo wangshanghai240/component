@@ -21,6 +21,8 @@
     <recommend :recommend="recom" ref="recommend"></recommend>
     <!-- 底部工具栏 -->
     <detail-bottom-nav @addcartp='adcart'></detail-bottom-nav>
+    <!-- 消息弹窗 -->
+    <toast message='s'></toast>
   </div>
 </template>
 
@@ -34,6 +36,7 @@ import DetailParams from "./childComps/DetailParams.vue";
 import Comment from "./childComps/Comment.vue";
 import Recommend from "./childComps/Recommend.vue";
 import DetailBottomNav from './childComps/DetailBottomNav.vue'
+import Toast from 'components/common/toast/Toast.vue'
 
 import { getDetailData, getRecommend, Goods, Shop } from "network/detail";
 import { debounce } from "utils/debounce";
@@ -49,7 +52,8 @@ export default {
     DetailParams,
     Comment,
     Recommend,
-    DetailBottomNav
+    DetailBottomNav,
+    Toast,
   },
   name: "Detail",
   data() {

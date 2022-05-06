@@ -1,6 +1,10 @@
 <template>
   <div class="list">
     <div class="c" v-for="item of cartlist" :key="item.count">
+      <!-- 选中状态 -->
+      <div class="gou" @click='showit'>
+          <img src="~assets/img/gou.png" alt="" v-show='isactive'>
+      </div>
       <!-- 产品图片 -->
       <div class="img b">
         <img :src="item.img" alt="error" />
@@ -24,12 +28,18 @@ import { mapState } from "vuex";
 export default {
   name: "CartList",
   data() {
-    return {};
+    return {
+        isactive:false
+    };
   },
   computed: mapState({
     cartlist: "cart",
   }),
-  methods: {},
+  methods: {
+      showit(){
+          this.isactive = !this.isactive
+      }
+  },
 };
 </script>
 
@@ -42,18 +52,30 @@ export default {
     overflow:auto;
 }
 .c {
-  width: 94vw;
+  width: 97vw;
   border-radius: 0.5em;
   box-shadow: 0 0 0.1em 0.1em #d0d0d0;
   margin: .6em auto;
   background:#fff;
 }
+.c .gou{
+  width:6.5vw;
+  display:inline-block;
+  border-radius:50%;
+  background:#cecece;
+  height:2.9vh;
+}
+.c .gou img{
+    width:90%;
+    max-width:100%;
+    color:#f40;
+}
 .c .b {
   display: inline-block;
 }
 .c .two{
-    display:inline-block;
-    width:65vw;
+    float:right;
+    width:60vw;
     margin:1.1em 0;
 }
 .c .two .a{
@@ -69,7 +91,7 @@ export default {
 .c .img img {
   width: 100%;
   max-width: 100%;
-  vertical-align: -4px;
+  vertical-align:-2px;
 }
 .c .des{
     margin-bottom:.45em;
@@ -91,9 +113,10 @@ export default {
     border:.05em solid rgb(111, 111, 111);
     border-radius:.32em;
     padding:.33em;
-    float:right;
+    vertical-align:3px;
+    margin-left:7em;
 }
 .two .count span{
-    font-size:.5em;
+    font-size:.75em;
 }
 </style>
