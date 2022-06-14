@@ -6,6 +6,14 @@ import store from './store'
 import bus from 'utils/eventBus.js'
 Vue.config.productionTip = false
 
+import toast from 'plugin/Toast.vue'
+const myplugin = {
+  install(Vue){
+    console.log('install---------')
+    Vue.component('toast',toast)
+  }
+}
+Vue.use(myplugin)
 new Vue({
   router,
   store,

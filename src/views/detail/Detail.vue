@@ -20,9 +20,22 @@
     <!-- 推荐 -->
     <recommend :recommend="recom" ref="recommend"></recommend>
     <!-- 底部工具栏 -->
-    <detail-bottom-nav @addcartp='adcart'></detail-bottom-nav>
+    <detail-bottom-nav @addcartp="adcart"></detail-bottom-nav>
     <!-- 消息弹窗 -->
-    <toast message='s'></toast>
+    <toast v-if="isshow">
+      <template #title>
+        <span>提示</span>
+      </template>
+      <template #content>
+        <span>确认加入购物车?</span>
+      </template>
+      <template #cancel>
+        <button class="can one" @click="cancel">取消</button>
+      </template>
+      <template #confirm>
+        <button class="com one" @click="comfirm">确认</button>
+      </template>
+    </toast>
   </div>
 </template>
 
@@ -35,8 +48,8 @@ import DetailGoodsInfo from "./childComps/DetailGoodsInfo.vue";
 import DetailParams from "./childComps/DetailParams.vue";
 import Comment from "./childComps/Comment.vue";
 import Recommend from "./childComps/Recommend.vue";
-import DetailBottomNav from './childComps/DetailBottomNav.vue'
-import Toast from 'components/common/toast/Toast.vue'
+import DetailBottomNav from "./childComps/DetailBottomNav.vue";
+import Toast from "plugin/Toast.vue";
 
 import { getDetailData, getRecommend, Goods, Shop } from "network/detail";
 import { debounce } from "utils/debounce";
@@ -76,6 +89,7 @@ export default {
       // offsetTop
       componentOffsetTop: [],
       index: 0,
+      isshow: false,
     };
   },
   // TODO:here is todo
@@ -95,13 +109,13 @@ export default {
       this.componentOffsetTop.push(this.$refs.params.$el.offsetTop - 44);
       this.componentOffsetTop.push(this.$refs.recommend.$el.offsetTop - 44);
       console.log(this.componentOffsetTop);
-    },100);
+    }, 100);
     // 监听滚动，注意退出组件之后需要销毁监听事件
     this.addevent();
   },
-  destroyed(){
+  destroyed() {
     // 销毁组件移除事件监听
-    window.removeEventListener('scroll', this.contentindex)
+    window.removeEventListener("scroll", this.contentindex);
   },
   mounted() {
     // 根据iid请求数据
@@ -130,7 +144,7 @@ export default {
       this.$nextTick(() => {
         // 虽然DOM渲染出来了但是图片却没有
         // 它会导致offsetTop的值出现误差
-        this.getdebounce()
+        this.getdebounce();
       });
     },
     itemindex(t) {
@@ -164,20 +178,32 @@ export default {
     addevent() {
       window.addEventListener("scroll", this.contentindex, false);
     },
-    adcart(){
+    // 添加到购物车
+    adcart() {
+      this.isshow = !this.isshow;
+      // setTimeout(()=>{
+      //   this.isshow = false
+      // },2300)
+    },
+    cancel() {
+      this.isshow = !this.isshow;
+    },
+    comfirm() {
+
       // 添加购物车所需要的信息
-      let productstore = {}
-      productstore.img = this.topimgs[0]
-      productstore.desc = this.detailinfo.desc
-      productstore.price = this.goodsList.lowNowPrice
+      let productstore = {};
+      productstore.img = this.topimgs[0];
+      productstore.desc = this.detailinfo.desc;
+      productstore.price = this.goodsList.lowNowPrice;
       // productstore.iid = this.$route.query.iid
-      productstore.iid = this.iid
+      productstore.iid = this.iid;
       // productstore.count = 0
       console.log(productstore.iid);
       // 提交信息
-      this.$store.dispatch('cartadd',productstore)
+      this.$store.dispatch("cartadd", productstore);
       // console.log(productstore);
-    }
+      this.cancel()
+    },
   },
 };
 </script>
@@ -186,8 +212,8 @@ export default {
 .detail {
   overflow: hidden;
 }
-.detail::-webkit-scrollbar{
-  width:none !important;
+.detail::-webkit-scrollbar {
+  width: none !important;
 }
 .detail .content {
   overflow: hidden;
