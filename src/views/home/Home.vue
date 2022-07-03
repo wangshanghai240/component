@@ -170,6 +170,7 @@ export default {
           // 完成上拉加载更多
           this.$refs.scroll.finishPullup();
         })
+        console.log('complete!')
     },
   },
 };
