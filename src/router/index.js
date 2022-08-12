@@ -44,7 +44,7 @@ moduleRouter.keys().forEach(item => {
 })
 let router = new vuerouter({
     routes,
-    mode: 'history'
+    mode: 'hash'
 })
 
 // 重复点击触发promise错误解决方法

@@ -24,6 +24,7 @@ export default {
 .left,
 .right {
   width: 60px;
+  /* flex:1; */
 }
 .center {
   flex: 1;

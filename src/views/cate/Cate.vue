@@ -1,59 +1,19 @@
 <template>
-  <div class="cate" ref="cate">
-    <!-- 导航 -->
-      <navbar>
-        <div slot='left' class="left" @click='back'>
-          <img src="~assets/img/back.svg" alt="error">
-        </div>
-        <div class="center" slot='center'>
-          <span>分类</span>
-        </div>
-      </navbar>
-      
+  <div class="cate">
+    <!-- 导航栏 -->
+    <cate-tab></cate-tab>
   </div>
 </template>
 
 <script>
-import navbar from 'components/common/NavBar.vue'
-import BScroll from 'better-scroll'
+import CateTab from './childCom/CateTab.vue'
 export default {
-    name:'cate',
-    components:{ navbar },
-    data(){
-      return{
-        scroll:null
-      }
-    },
-    mounted(){
-      this.scroll = new BScroll(this.$refs.cate,{
-        probetype:3,
-        click:true,
-        pullUpLoad:true
-      })
-      this.scroll.on('scroll',(position) =>{
-        console.log(position)
-      })
-      this.scroll.on('pullingUp',() =>{
-        console.log('上拉加载更多')
-      })
-    },
-    methods:{
-      back(){
-        this.$router.back()
-      },
-      btn(){
-        console.log('ccc')
-      }
-    }
+  name: "Cate",
+  components: { CateTab },
+  methods: {}
 }
 </script>
 
 <style>
-.cate{
-  height:200px;
-  overflow:hidden;
-}
-.cate .left img{
-  width:1.4em;
-}
+
 </style>

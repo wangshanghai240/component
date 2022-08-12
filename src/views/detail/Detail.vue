@@ -135,6 +135,7 @@ export default {
       // 获取评论
       if (res.data.result.rate.cRate) {
         this.comment = res.data.result.rate;
+        console.log(res.data.result.rate)
       }
     });
   },
