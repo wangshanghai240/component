@@ -7,13 +7,13 @@ export function getDetailData(iid){
         params:{
             iid
         }
-    })
+    })[0]
 }
 // 获取推荐列表数据
 export function getRecommend(){
     return request({
         url:'/recommend',
-    })
+    })[0]
 }
 export class Goods{
     constructor(itemInfo,columns,services){

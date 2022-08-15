@@ -20,6 +20,7 @@ export default {
   line-height: 44px;
   text-align: center;
   justify-content: center;
+  align-items: center;
 }
 .left,
 .right {

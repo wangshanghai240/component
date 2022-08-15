@@ -2,8 +2,8 @@
   <div class="cate" ref="cate">
     <!-- 导航 -->
     <navbar>
-      <div slot='left' class="left" @click='back'>
-        <img src="~assets/img/back.svg" alt="error">
+      <div slot='left' class="left-back" @click='back'>
+        <img src="~assets/img/back.svg" alt="error" class="image">
       </div>
       <div class="center" slot='center'>
         <span>分类</span>
@@ -22,6 +22,7 @@ export default {
       // scroll: null
     }
   },
+  // give up use the better-scrll
   // mounted() {
   //   this.scroll = new BScroll(this.$refs.cate, {
   //     probetype: 3,
@@ -47,20 +48,18 @@ export default {
 </script>
 
 <style scoped>
-.cate {
-  /* height: 200px; */
-  /* overflow: hidden; */
+/* 顶部tab */
+.cate .navbar {
+  background:#ffc0cb;
 }
-
-.cate .left {
+/* 返回按钮位置 */
+.cate .left-back {
   display: flex;
-  align-items: center;
   justify-content: center;
-  flex-wrap: nowrap;
+  align-items: center;
 }
-
-.cate .left img {
+/* 返回按钮 */
+.cate .left-back .image {
   width: 1.4em;
-
 }
 </style>

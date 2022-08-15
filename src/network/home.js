@@ -5,7 +5,7 @@ import { request } from './request'
 export function getHomeMultidata(){
     return request({
         url:'/home/multidata'
-    })
+    })[0]
 }
 // 请求首页商品数据
 export function getHomeGoods(page, type){
@@ -15,5 +15,5 @@ export function getHomeGoods(page, type){
             type,
             page
         }
-    })
+    })[0]
 }

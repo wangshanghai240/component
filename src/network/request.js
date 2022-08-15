@@ -6,7 +6,11 @@ export function request(config){
     let instance = axios.create({
         timeout:5000,
         baseURL :'http://152.136.185.210:7878/api/hy66',
-    })
+    }),
+        instance2 = axios.create({
+            timeout:5000,
+            baseURL:'http://106.55.5.86:3000/api'
+        })
     // 拦截器，这个拦截器可以是全局的也可以是实例的请求拦截
     // axios.interceptors.request.use()
     // 为什么要有拦截器，即用途是什么：①我们发送的某些信息不符合服务器的要求，需要添加一些东西
@@ -31,5 +35,5 @@ export function request(config){
         console.log(err)
     })
 // 发送真正的网络请求
-    return instance(config)
+    return [instance(config),instance2(config)]
 }
